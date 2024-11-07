@@ -47,6 +47,7 @@ $obj = $result->fetch_object();
     </thead>
     <tbody>
     <?php
+    $prrTT = 0;
     $sql_prr = "SELECT a.*,b.*,c.* FROM cga_practice_record AS a ";
     $sql_prr.= "INNER JOIN cga_ceremony_seq AS b ON a.ces_id=b.ces_id ";
     $sql_prr.= "INNER JOIN cga_practice_time AS c ON a.prt_id=c.prt_id ";
@@ -65,11 +66,17 @@ $obj = $result->fetch_object();
     <td class="col-md-1"><?=displayText($obj_prr->prr_speed_per_min)?></td>
     <td class="col-md-2"><?=displayResult($obj_prr->prr_result)?></td>
     <td class="col-md-1"><?=displayText($obj_prr->prr_counting)?></td>
-    </div>
     </tr>
-    <?php }
+    <?php
+            $prrTT+= $obj_prr->prr_time_total;
+        }
     }
     ?>
+    <tr class="fw-bold table-secondary">
+        <td class="col-md-6 text-center" colspan="5">เวลาเฉลี่ยรวม</td>
+        <td class="col-md-1"><?=displayMinute($prrTT)?></td>
+        <td class="col-md-5" colspan="3"><?=''?></td>
+    </tr>
     </tbody>
   </table>
   </div>

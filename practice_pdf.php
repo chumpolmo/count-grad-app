@@ -48,6 +48,7 @@ $pdf->SetXY(186,35);
 $pdf->Cell(17,12,iconv('UTF-8', 'cp874', $header[8]),1,0,'C');
 $pdf->Ln();
 
+$prrTT = 0;
 $sql_prr = "SELECT a.*,b.*,c.* FROM cga_practice_record AS a ";
 $sql_prr.= "INNER JOIN cga_ceremony_seq AS b ON a.ces_id=b.ces_id ";
 $sql_prr.= "INNER JOIN cga_practice_time AS c ON a.prt_id=c.prt_id ";
@@ -56,6 +57,7 @@ $result_prr = $conn->query($sql_prr);
 
 $pdf->SetFont('THSarabunNew','',12);
 while($obj_prr = $result_prr->fetch_object()){
+    $prrTT+=$obj_prr->prr_time_total;
     $pdf->Cell(8,6,$obj_prr->ces_order,1,0,'C');
     $pdf->Cell(62,6,iconv('UTF-8', 'cp874', $obj_prr->ces_title),1,0,'L');
     $pdf->Cell(18,6,iconv('UTF-8', 'cp874', $obj_prr->ces_numOfCert),1,0,'C');
@@ -67,6 +69,12 @@ while($obj_prr = $result_prr->fetch_object()){
     $pdf->Cell(17,6,iconv('UTF-8', 'cp874', displayText($obj_prr->prr_counting)),1,0,'C');
     $pdf->Ln();
 }
+
+$pdf->SetFont('THSarabunNew Bold','',12);
+$pdf->Cell(124,6,iconv('UTF-8', 'cp874', 'เวลาเฉลี่ยรวม'),1,0,'C');
+$pdf->Cell(15,6,iconv('UTF-8', 'cp874', displayMinute($prrTT)),1,0,'C');
+$pdf->Cell(54,6,'',1,0,'C');
+$pdf->Ln();
 
 // Go to 1.5 cm from bottom
 $pdf->SetY(-34);
