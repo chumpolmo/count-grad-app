@@ -63,7 +63,7 @@ $obj = $result->fetch_object();
     <td class="col-md-1"><?=displayTime($obj_prr->prr_time_start)?></td>
     <td class="col-md-1"><?=displayTime($obj_prr->prr_time_end)?></td>
     <td class="col-md-1"><?=displayMinute($obj_prr->prr_time_total)?></td>
-    <td class="col-md-1"><?=displayText($obj_prr->prr_speed_per_min)?></td>
+    <td class="col-md-1"><?=displayNumber($obj_prr->prr_speed_per_min)?></td>
     <td class="col-md-2"><?=displayResult($obj_prr->prr_result)?></td>
     <td class="col-md-1"><?=displayText($obj_prr->prr_counting)?></td>
     </tr>

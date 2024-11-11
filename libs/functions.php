@@ -1,4 +1,11 @@
 <?php
+function displayNumber($a){
+    if(isset($a)){ 
+        return number_format($a, 2, '.', '');
+    }
+    return '0.00';
+}
+
 function displayText($a){
     if(isset($a)){ 
         return $a; 

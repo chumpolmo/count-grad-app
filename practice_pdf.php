@@ -29,14 +29,15 @@ $pdf->Ln();
 
 // header
 $header = array(
-    "ลำดับ","รายการ","จ.บัณฑิต","เวลาเริ่ม","เวลาจบ","เวลารวม (mm:ss)",
-    "ความเร็วฯ (คน:นาที)","เกณฑ์พิจารณา","จ.บัณฑิตจริง"
+    "ลำดับ","รายการ","จำนวน บัณฑิต","เวลาเริ่ม","เวลาจบ","เวลารวม (mm:ss)",
+    "ความเร็วฯ (คน:นาที)","เกณฑ์พิจารณา","จำนวน บัณฑิตจริง"
 );
 // Header
 $pdf->SetFont('THSarabunNew Bold','',12);
 $pdf->Cell(8,12,iconv('UTF-8', 'cp874', $header[0]),1,0,'C');
 $pdf->Cell(62,12,iconv('UTF-8', 'cp874', $header[1]),1,0,'C');
-$pdf->Cell(18,12,iconv('UTF-8', 'cp874', $header[2]),1,0,'C');
+$pdf->MultiCell(18,6,iconv('UTF-8', 'cp874', $header[2]),1,'C');
+$pdf->SetXY(98,35);
 $pdf->Cell(18,12,iconv('UTF-8', 'cp874', $header[3]),1,0,'C');
 $pdf->Cell(18,12,iconv('UTF-8', 'cp874', $header[4]),1,0,'C');
 $pdf->MultiCell(15,6,iconv('UTF-8', 'cp874', $header[5]),1,'C');
@@ -45,8 +46,7 @@ $pdf->MultiCell(15,6,iconv('UTF-8', 'cp874', $header[6]),1,'C');
 $pdf->SetXY(164,35);
 $pdf->Cell(22,12,iconv('UTF-8', 'cp874', $header[7]),1,0,'C');
 $pdf->SetXY(186,35);
-$pdf->Cell(17,12,iconv('UTF-8', 'cp874', $header[8]),1,0,'C');
-$pdf->Ln();
+$pdf->MultiCell(17,6,iconv('UTF-8', 'cp874', $header[8]),1,'C');
 
 $prrTT = 0;
 $sql_prr = "SELECT a.*,b.*,c.* FROM cga_practice_record AS a ";
@@ -64,14 +64,14 @@ while($obj_prr = $result_prr->fetch_object()){
     $pdf->Cell(18,6,iconv('UTF-8', 'cp874', $obj_prr->prr_time_start),1,0,'C');
     $pdf->Cell(18,6,iconv('UTF-8', 'cp874', $obj_prr->prr_time_end),1,0,'C');
     $pdf->Cell(15,6,iconv('UTF-8', 'cp874', displayMinute($obj_prr->prr_time_total)),1,0,'C');
-    $pdf->Cell(15,6,iconv('UTF-8', 'cp874', displayText($obj_prr->prr_speed_per_min)),1,0,'C');
+    $pdf->Cell(15,6,iconv('UTF-8', 'cp874', displayNumber($obj_prr->prr_speed_per_min)),1,0,'C');
     $pdf->Cell(22,6,iconv('UTF-8', 'cp874', displayResultInPDF($obj_prr->prr_result)),1,0,'C');
     $pdf->Cell(17,6,iconv('UTF-8', 'cp874', displayText($obj_prr->prr_counting)),1,0,'C');
     $pdf->Ln();
 }
 
 $pdf->SetFont('THSarabunNew Bold','',12);
-$pdf->Cell(124,6,iconv('UTF-8', 'cp874', 'เวลาเฉลี่ยรวม'),1,0,'C');
+$pdf->Cell(124,6,iconv('UTF-8', 'cp874', 'เวลารวม'),1,0,'C');
 $pdf->Cell(15,6,iconv('UTF-8', 'cp874', displayMinute($prrTT)),1,0,'C');
 $pdf->Cell(54,6,'',1,0,'C');
 $pdf->Ln();

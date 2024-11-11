@@ -83,6 +83,10 @@ if(isset($_POST['metId']) && $_POST['metId'] == 'SETUPD'){
     $numOfCert = $_GET['numOfCert'];
     $prrTS = date('H:i:s');
 
+    $x1 = 0;
+    $x2 = 0;
+    $z1 = 0;
+    $z2 = 0;
     $sql_cfg = "SELECT set_value FROM cga_settings WHERE set_name LIKE 'numOfStud'";
     $result_cfg = $conn->query($sql_cfg);
     $obj_cfg = $result_cfg->fetch_object();
@@ -149,7 +153,7 @@ if(isset($_POST['metId']) && $_POST['metId'] == 'SETUPD'){
         <tr><td>เวลาเริ่ม:</td><td><?php echo displayTime($obj_prr->prr_time_start); ?></td></tr>
         <tr><td>เวลาจบ:</td><td><?php echo displayTime($obj_prr->prr_time_end); ?></td></tr>
         <tr><td>เวลารวม (นาที:วินาที):</td><td><?php echo displayMinute($obj_prr->prr_time_total); ?></td></tr>
-        <tr><td>ความเร็วในการอ่าน (คน/นาที):</td><td><?php echo displayText($obj_prr->prr_speed_per_min); ?></td></tr>
+        <tr><td>ความเร็วในการอ่าน (คน/นาที):</td><td><?php echo displayNumber($obj_prr->prr_speed_per_min); ?></td></tr>
         <tr><td>เกณฑ์พิจารณา:</td><td><?php echo displayResult($obj_prr->prr_result); ?></td></tr>
         <tr><td>จำนวนขานนามบัณฑิต:</td><td><?php echo displayText($obj_prr->prr_counting); ?></td></tr>
       </table>
