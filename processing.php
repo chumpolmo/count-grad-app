@@ -111,9 +111,9 @@ if(isset($_POST['metId']) && $_POST['metId'] == 'SETUPD'){
 
         // Check the reading speed criteria.
         $st = 0;
-        if($z2 == $z1) $st = 10;
-        else if($z2 > $z1) $st = 20;
-        else if($z2 < $z1) $st = 30;
+        if($x2 == $z1) $st = 10;
+        else if($x2 < $z1) $st = 20;
+        else if($x2 > $z1) $st = 30;
   
         // echo "[x1-$x1,x2-$x2,y-$numOfCert,z2-$z2,z1-$z1,st-$st]";
         // echo "[z2-$z2 | z1-$z1 | st-$st]";
